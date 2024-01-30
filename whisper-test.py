@@ -6,3 +6,6 @@ x = transcriber("recorded_audio.wav")
 
 print(x)
 print("done")
+
+with open("newtext.txt", "w") as f:
+    f.write()
