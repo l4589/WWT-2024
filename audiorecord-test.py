@@ -11,7 +11,7 @@ Requires:
 
 fs = 44100
 
-duration = 300  # seconds
+duration = 5  # seconds
 myrecording = sd.rec(int(duration * fs), samplerate=fs, channels=2)
 sd.wait()
 print('done')
