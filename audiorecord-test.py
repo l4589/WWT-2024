@@ -25,4 +25,3 @@ print(f"Saving recording to {file_path}...")
 sf.write(file_path, myrecording, fs)
 print("Recording saved.")
 
-yo yo yo 
