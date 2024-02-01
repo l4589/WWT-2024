@@ -9,7 +9,7 @@ transcriber = pipeline(task="automatic-speech-recognition", model="openai/whispe
 duration = 5
 t=""
 fs = 44100
-
+ 
 
 print("starting")
 for i in range(4):#how many durations that loop goes through
