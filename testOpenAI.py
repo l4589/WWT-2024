@@ -1,7 +1,7 @@
 from openai import OpenAI
 client = OpenAI()
 
-with open("adamsMIT17.txt", "r") as f:
+with open("summarytext.txt", "r") as f:
     text = f.read()
 
 completion = client.chat.completions.create(
@@ -12,4 +12,10 @@ completion = client.chat.completions.create(
   ]
 )
 
+
 print(completion.choices[0].message)
+
+aitext=completion.choices[0].message.content
+
+with open("AItext.txt", "w") as f:
+  f.write(aitext)
