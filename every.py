@@ -9,10 +9,10 @@ transcriber = pipeline(task="automatic-speech-recognition", model="openai/whispe
 duration = 5
 t=""
 fs = 44100
-
+ 
 
 print("starting")
-for i in range(1):#how many durations that loop goes through
+for i in range(4):#how many durations that loop goes through
     print(i)
 
    #record the lecture
@@ -43,7 +43,7 @@ print(text)
     
 
 
-#x = summarizer(text, max_length=230, min_length=30, do_sample=False)
+x = summarizer(text, max_length=230, min_length=30, do_sample=False)
 
-#print(x)
+print(x)
 print("done")
