@@ -11,7 +11,7 @@ duration = 10
 t=""
 fs = 44100
 summarytime=2*60
-totaltime = 20*60 #change first number depending on how many min the lecture is
+totaltime = 5*60 #change first number depending on how many min the lecture is
 
 print("starting")
 
@@ -52,7 +52,18 @@ for summarystep in range(int(totaltime/summarytime)):
     print(x)
 
     with open(f"summarytext{str(summarystep).zfill(4)}.txt", "w") as f:
-        f.write(x)
+        f.write(x[0]["summary_text"])
+
+    
+with open("summarytext.txt", "w") as f:
+    f.write("")
+
+for i in range(summarystep):
+    with open(f"summarytext{str(i).zfill(4)}.txt", "r") as f:
+        text = f.read()
+    
+    with open("summarytext.txt", "a") as f:
+        f.write(text)
 
 
 print("done")
