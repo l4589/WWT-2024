@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transcript Generator</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .section {
+            flex: 1;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        .section:not(:last-child) {
+            margin-bottom: 10px;
+        }
+
+        .upper-section, .middle-section, .lower-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .upper-section, .lower-section {
+            align-items: center;
+        }
+
+        .lower-section {
+            justify-content: center;
+        }
+
+        .middle-section {
+            overflow-y: auto;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="section upper-section">
+            <h2>Checkboxes</h2>
+            <div class="checkbox-group">
+                <input type="checkbox" id="checkbox1">
+                <label for="checkbox1">Checkbox 1</label>
+                <input type="checkbox" id="checkbox2">
+                <label for="checkbox2">Checkbox 2</label>
+                <input type="checkbox" id="checkbox3">
+                <label for="checkbox3">Checkbox 3</label>
+                <input type="checkbox" id="checkbox4">
+                <label for="checkbox4">Checkbox 4</label>
+                <input type="checkbox" id="checkbox5">
+                <label for="checkbox5">Checkbox 5</label>
+            </div>
+            <button id="sendRequestBtn">Send Request</button>
+        </div>
+        <div class="section middle-section">
+            <h2>Output</h2>
+            <div id="output"></div>
+        </div>
+        <div class="section lower-section">
+            <h2>Get Transcript</h2>
+            <textarea id="transcriptTextarea" rows="4" cols="50"></textarea><br>
+            <button id="getTranscriptBtn">Get Transcript</button>
+        </div>
+    </div>
+    <script>
+        // JavaScript code remains unchanged
+    </script>
+</body>
+</html>
