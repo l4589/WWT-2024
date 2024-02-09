@@ -82,7 +82,16 @@
         </div>
     </div>
     <script>
-        // JavaScript code remains unchanged
+        document.getElementById("getTranscriptBtn").addEventListener("click", function() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "/path_to_your_file_on_server.txt", true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    document.getElementById("transcriptTextarea").value = xhr.responseText;
+                }
+            };
+            xhr.send();
+        });
     </script>
 </body>
 </html>
