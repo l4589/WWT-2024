@@ -53,6 +53,7 @@ async def getDialValue(ip="20.1.0.95:80"):
     try:
         D = await postRequest(ip,"dialPercent")
         print("dialValue:", D)
+        return D
     except:
         print("could not get the dial percent")
   
@@ -71,7 +72,8 @@ async def main():
     await site.start()
     print(f"Server running at http://{host}:8080/")
     # await getDialValue()
-    asyncio.create_task(getDialValue())
+    dialVal = await getDialValue() # asyncio.create_task(getDialValue())
+    print("Dial Test:", dialVal)
 
     asyncio.create_task(print_hello())
     asyncio.create_task(getLightLevel(dt=5))
