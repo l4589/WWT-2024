@@ -51,23 +51,54 @@
             flex-wrap: wrap;
             gap: 10px;
         }
+
+        /* Style for dropdown menu */
+        .dropdown {
+        position: relative;
+        display: inline-block;
+        margin: 1em;
+        }
+        
+        .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 120px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        padding: 12px 16px;
+        z-index: 1;
+        }
+        
+        .dropdown:hover .dropdown-content {
+        display: block;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+
         <div class="section upper-section">
             <h2>Checkboxes</h2>
             <div class="checkbox-group">
                 <input type="checkbox" id="checkbox1">
-                <label for="checkbox1">Checkbox 1</label>
+                <label for="checkbox1">Bullet points</label>
                 <input type="checkbox" id="checkbox2">
-                <label for="checkbox2">Checkbox 2</label>
+                <label for="checkbox2">Simple Vocab</label>
                 <input type="checkbox" id="checkbox3">
                 <label for="checkbox3">Checkbox 3</label>
                 <input type="checkbox" id="checkbox4">
                 <label for="checkbox4">Checkbox 4</label>
                 <input type="checkbox" id="checkbox5">
                 <label for="checkbox5">Checkbox 5</label>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Summary Length</button>
+                <div class="dropdown-content">
+                    <a href="#">Short</a>
+                    <a href="#">Medium</a>
+                    <a href="#">Long</a>
+                </div>
             </div>
             <button id="sendRequestBtn">Send Request</button>
         </div>
