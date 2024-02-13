@@ -4,6 +4,7 @@ from datetime import datetime
 import json
 #from getIP import getIP
 from uAio import *
+import subprocess
 
 async def handle(request):
     with open("index.html", "r") as f:
@@ -16,11 +17,15 @@ async def handlePost(request):
     print(data)
     # print(data["action"], data["value"])
 
-    if data['action'] == "getTime":
-        now = datetime.now()
-        print(now.ctime())
-        rData['item'] = "time"
-        rData['status'] = now.ctime() # a string representing the current time
+    if data['action'] == "startRecording":
+   
+
+        
+        subprocess.run(['python3', 'every3.py'])
+
+
+        rData['item'] = "startRecording"
+        rData['status'] = "recording" # a string representing the current time
     
     response = json.dumps(rData)
     print("Response: ", response)

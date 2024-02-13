@@ -3,28 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Start Program</title>
+    <title>Document</title>
 </head>
 <body>
-    <button id="startButton">Start</button>
-
-    <script>
-        document.getElementById('startButton').addEventListener('click', function() {
-            fetch('/start_program', {
-                method: 'POST'
-            })
-            .then(response => {
-                if (response.ok) {
-                    alert('Program started');
-                } else {
-                    alert('Failed to start program');
-                }
-            })
-            .catch(error => {
-                console.error('Error starting program:', error);
-                alert('Error starting program');
-            });
-        });
-    </script>
+    <input type="button" id = "startRecording" value="Start Recording">
+    <div id="timeSlot">Time</div>
 </body>
+
+<script>
+    function sendRequest(target, action, value="") {
+        console.log("making request")
+        let xR = new XMLHttpRequest();
+        xR.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                
+                console.log("Server Response:", this.responseText);
+                data = JSON.parse(this.responseText);
+                console.log("data:", data);
+                console.log("data['item']:", data["item"]);
+                
+                //Handle responses
+                if (data["item"] == "startRecording") {
+                    console.log("Got the time: ", data["status"]);
+                    timeSlot.innerText = data["status"];
+                }
+            }
+        }
+        let data = {};
+        data["action"] = action;
+        data["value"] = value;
+        console.log("data:", data);
+        xR.open("POST", target, true);
+        xR.send(JSON.stringify(data));
+    }
+
+    startRecording.addEventListener("click", function(){
+        sendRequest("/", "startRecording");
+    })
+
+</script>
+
 </html>
