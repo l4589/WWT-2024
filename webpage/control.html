@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Program</title>
+</head>
+<body>
+    <button id="startButton">Start</button>
+
+    <script>
+        document.getElementById('startButton').addEventListener('click', function() {
+            fetch('/start_program', {
+                method: 'POST'
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Program started');
+                } else {
+                    alert('Failed to start program');
+                }
+            })
+            .catch(error => {
+                console.error('Error starting program:', error);
+                alert('Error starting program');
+            });
+        });
+    </script>
+</body>
+</html>
