@@ -48,6 +48,16 @@ async def getLightLevel(dt=1):
         await asyncio.sleep(dt)
 
 
+''' Get the dial value'''
+async def getDialValue(ip="20.1.0.95:80"):
+    try:
+        D=await postRequest(ip,"photoResistor")
+        print("dialValue:", D)
+    except:
+        print("could not get the dial percent")
+  
+
+
 async def main():
     app = web.Application()
     app.router.add_get('/', handle)
@@ -60,6 +70,7 @@ async def main():
     site = web.TCPSite(runner, host, 8080)  # Bind to the local IP address
     await site.start()
     print(f"Server running at http://{host}:8080/")
+    await getDialValue()
 
     asyncio.create_task(print_hello())
     asyncio.create_task(getLightLevel(dt=5))
