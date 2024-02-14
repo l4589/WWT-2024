@@ -11,25 +11,35 @@ async def handle(request):
         html_content = f.read()
     return web.Response(text=html_content, content_type='text/html')
 
+async def handleControl(request):
+    with open("control.html", "r") as f:
+        html_content = f.read()
+    return web.Response(text=html_content, content_type='text/html')
+
 async def handlePost(request):
     data = await request.json()
     rData = {}
     print(data)
     # print(data["action"], data["value"])
 
-    if data['action'] == "startRecording":
-   
-
-        
+    if data['action'] == "startRecording":     
         subprocess.run(['python3', 'every3.py'])
-
 
         rData['item'] = "startRecording"
         rData['status'] = "recording" # a string representing the current time
+
+    if data['action'] == "getTranscript":     
+        with open("AItext.txt", "r") as f:
+            txt = f.read()
+
+        rData['item'] = "getTranscript"
+        rData['status'] = txt # a string representing the current time
     
     response = json.dumps(rData)
     print("Response: ", response)
     return web.Response(text=response, content_type='text/html')
+
+
 
 # print "Hello" every 1 second (testing async)
 async def print_hello():
@@ -61,7 +71,9 @@ async def getDialValue(ip="20.1.0.95:80"):
 
 async def main():
     app = web.Application()
-    app.router.add_get('/', handle)
+   
+    app.router.add_get('/', handle) 
+    app.router.add_get('/control', handleControl)
     app.router.add_post("/", handlePost)
 
     runner = web.AppRunner(app)

@@ -122,21 +122,41 @@
         </div>
         <div class="section lower-section">
             <h2>Get Transcript</h2>
-            <textarea id="transcriptTextarea" rows="4" cols="50"></textarea><br>
+            <textarea id="transcriptTextarea" rows="4" cols="50"></textarea>
+            <div id = "TextArea2"></div><br>
             <button id="getTranscriptBtn">Get Transcript</button>
         </div>
     </div>
     <script>
-        document.getElementById("getTranscriptBtn").addEventListener("click", function() {
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", "AItext.txt", true);
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    document.getElementById("transcriptTextarea").value = xhr.responseText;
+        function sendRequest(target, action, value="") {
+            console.log("making request")
+            let xR = new XMLHttpRequest();
+            xR.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    
+                    console.log("Server Response:", this.responseText);
+                    data = JSON.parse(this.responseText);
+                    console.log("data:", data);
+                    console.log("data['item']:", data["item"]);
+                    
+                    //Handle responses
+                    if (data["item"] == "getTranscript") {
+                        console.log("Got the time: ", data["status"]);
+                        TextArea2.innerText = data["status"];
+                    }
                 }
-            };
-            xhr.send();
-        });
+            }
+            let data = {};
+            data["action"] = action;
+            data["value"] = value;
+            console.log("data:", data);
+            xR.open("POST", target, true);
+            xR.send(JSON.stringify(data));
+        }
+
+    getTranscriptBtn.addEventListener("click", function(){
+        sendRequest("/", "getTranscript");
+    })
     </script>
 </body>
 </html>
