@@ -12,6 +12,16 @@ completion = client.chat.completions.create(
   ]
 )
 
+completion = client.chat.completions.create(
+  model="gpt-3.5-turbo",
+  messages=[
+    {"role": "system", "content": "You are a high school student with ADHD that needs notes no this text to be simple"},
+    {"role": "user", "content": f"Use this lecture: {text}"}
+  ]
+)
+
+
+
 
 print(completion.choices[0].message)
 
