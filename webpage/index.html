@@ -51,23 +51,68 @@
             flex-wrap: wrap;
             gap: 10px;
         }
+
+        /* Style for dropdown menu */
+        .dropdown {
+        position: relative;
+        display: inline-block;
+        margin: 1em;
+        }
+        
+        .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 120px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        padding: 12px 16px;
+        z-index: 1;
+        }
+        
+        .dropdown:hover .dropdown-content {
+        display: block;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+
         <div class="section upper-section">
             <h2>Checkboxes</h2>
             <div class="checkbox-group">
                 <input type="checkbox" id="checkbox1">
-                <label for="checkbox1">Checkbox 1</label>
+                <label for="checkbox1">Bullet points</label>
                 <input type="checkbox" id="checkbox2">
-                <label for="checkbox2">Checkbox 2</label>
+                <label for="checkbox2">Simple Vocab</label>
                 <input type="checkbox" id="checkbox3">
                 <label for="checkbox3">Checkbox 3</label>
                 <input type="checkbox" id="checkbox4">
                 <label for="checkbox4">Checkbox 4</label>
                 <input type="checkbox" id="checkbox5">
                 <label for="checkbox5">Checkbox 5</label>
+            </div>
+
+            <div>
+                <label for="sumLength">Summary Length</label>
+                <select  id="sumLength">
+                  <option value="short">Short</option>
+                  <option value="medium">Medium</option>
+                  <option value="long">Long</option>
+                </select> 
+            </div>
+            <div>
+                <label for="readLevel">Reading Level</label>
+                <select  id="readLevel">
+                  <option value="5th">5th</option>
+                  <option value="6th">6th</option>
+                  <option value="7th">7th</option>
+                  <option value="8th">8th</option>
+                  <option value="9th">9th</option>
+                  <option value="10th">10th</option>
+                  <option value="11th">11th</option>
+                  <option value="120px">12th</option>
+                  <option value="college">College</option>
+                </select> 
             </div>
             <button id="sendRequestBtn">Send Request</button>
         </div>
@@ -77,12 +122,41 @@
         </div>
         <div class="section lower-section">
             <h2>Get Transcript</h2>
-            <textarea id="transcriptTextarea" rows="4" cols="50"></textarea><br>
+            <textarea id="transcriptTextarea" rows="4" cols="50"></textarea>
+            <div id = "TextArea2"></div><br>
             <button id="getTranscriptBtn">Get Transcript</button>
         </div>
     </div>
     <script>
-        // JavaScript code remains unchanged
+        function sendRequest(target, action, value="") {
+            console.log("making request")
+            let xR = new XMLHttpRequest();
+            xR.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    
+                    console.log("Server Response:", this.responseText);
+                    data = JSON.parse(this.responseText);
+                    console.log("data:", data);
+                    console.log("data['item']:", data["item"]);
+                    
+                    //Handle responses
+                    if (data["item"] == "getTranscript") {
+                        console.log("Got the time: ", data["status"]);
+                        TextArea2.innerText = data["status"];
+                    }
+                }
+            }
+            let data = {};
+            data["action"] = action;
+            data["value"] = value;
+            console.log("data:", data);
+            xR.open("POST", target, true);
+            xR.send(JSON.stringify(data));
+        }
+
+    getTranscriptBtn.addEventListener("click", function(){
+        sendRequest("/", "getTranscript");
+    })
     </script>
 </body>
 </html>
