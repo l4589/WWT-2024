@@ -1,22 +1,16 @@
 from openai import OpenAI
 client = OpenAI()
 
+
+
 with open("summarytext.txt", "r") as f:
     text = f.read()
 
 completion = client.chat.completions.create(
   model="gpt-3.5-turbo",
   messages=[
-    {"role": "system", "content": "You are a high school student studying"},
+    {"role": "system", "content": "You are a  student studying"},
     {"role": "user", "content": f"Summarize this lecture: {text}"}
-  ]
-)
-
-completion = client.chat.completions.create(
-  model="gpt-3.5-turbo",
-  messages=[
-    {"role": "system", "content": "You are a high school student with ADHD that needs notes no this text to be simple"},
-    {"role": "user", "content": f"Use this lecture: {text}"}
   ]
 )
 
