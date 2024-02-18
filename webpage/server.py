@@ -5,6 +5,7 @@ import json
 #from getIP import getIP
 from uAio import *
 import subprocess
+from cTransOpenAI import *
 
 async def handle(request):
     with open("index.html", "r") as f:
@@ -34,6 +35,11 @@ async def handlePost(request):
 
         rData['item'] = "getTranscript"
         rData['status'] = txt # a string representing the current time
+
+    if data['action'] == "GetCustomSummary":     
+        cTrans = customTranscript(data['value'])
+        rData['item'] = "GetCustomSummary"
+        rData['status'] = cTrans # a string representing the current time
     
     response = json.dumps(rData)
     print("Response: ", response)
@@ -87,7 +93,7 @@ async def main():
     dialVal = await getDialValue() # asyncio.create_task(getDialValue())
     print("Dial Test:", dialVal)
 
-    asyncio.create_task(print_hello())
+#    asyncio.create_task(print_hello())
     asyncio.create_task(getLightLevel(dt=5))
 
     '''Testing post request'''

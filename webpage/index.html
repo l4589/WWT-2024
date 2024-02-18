@@ -80,7 +80,7 @@
         <div class="section upper-section">
             <h2>Checkboxes</h2>
             <div class="checkbox-group">
-                <input type="checkbox" id="checkbox1">
+                <input type="checkbox" id="bulletPoint">
                 <label for="checkbox1">Bullet points</label>
                 <input type="checkbox" id="checkbox2">
                 <label for="checkbox2">Simple Vocab</label>
@@ -117,8 +117,8 @@
             <button id="sendRequestBtn">Send Request</button>
         </div>
         <div class="section middle-section">
-            <h2>Output</h2>
-            <div id="output"></div>
+            <h2>Custom Summary</h2>
+            <div id="customSummary"></div>
         </div>
         <div class="section lower-section">
             <h2>Get Transcript</h2>
@@ -144,6 +144,11 @@
                         console.log("Got the time: ", data["status"]);
                         TextArea2.innerText = data["status"];
                     }
+
+                    if (data["item"] == "GetCustomSummary") {
+                        console.log("Got the time: ", data["status"]);
+                        customSummary.innerHTML = data["status"];
+                    }
                 }
             }
             let data = {};
@@ -158,7 +163,13 @@
         sendRequest("/", "getTranscript");
     })
     sendRequestBtn.addEventListener("click", function(){
-        sendRequest("/", "GetCustomSummary");
+        data = {};
+        if (bulletPoint.checked){
+            data["bulletpoints"] = true;
+        } else {
+            data["bulletpoints"] = false;
+        }
+        sendRequest("/", "GetCustomSummary", data);
     })
     </script>
 </body>
