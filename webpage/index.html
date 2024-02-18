@@ -108,9 +108,9 @@
                   <option value="7th">7th</option>
                   <option value="8th">8th</option>
                   <option value="9th">9th</option>
-                  <option value="10th">10th</option>
+                  <option value="10th" selected>10th</option>
                   <option value="11th">11th</option>
-                  <option value="120px">12th</option>
+                  <option value="12th">12th</option>
                   <option value="college">College</option>
                 </select> 
             </div>
@@ -169,6 +169,7 @@
         } else {
             data["bulletpoints"] = false;
         }
+        data["gradeLevel"] = readLevel.value;
         sendRequest("/", "GetCustomSummary", data);
     })
     </script>
