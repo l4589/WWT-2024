@@ -82,7 +82,7 @@
             <div class="checkbox-group">
                 <input type="checkbox" id="bulletPoint">
                 <label for="checkbox1">Bullet points</label>
-                <input type="checkbox" id="checkbox2">
+                <input type="checkbox" id="SimpleVocab">
                 <label for="checkbox2">Simple Vocab</label>
                 <input type="checkbox" id="checkbox3">
                 <label for="checkbox3">Checkbox 3</label>
@@ -169,7 +169,13 @@
         } else {
             data["bulletpoints"] = false;
         }
+        if (SimpleVocab.checked){
+            data["SimpleVocab"] = true;
+        } else {
+            data["SimpleVocab"] = false;
+        }
         data["gradeLevel"] = readLevel.value;
+
         sendRequest("/", "GetCustomSummary", data);
     })
     </script>
